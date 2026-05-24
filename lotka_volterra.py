@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.integrate import odeint
 from sklearn.linear_model import Ridge
+import config          # <-- added this import
 
 def estimate_interaction_matrix(returns):
     """
@@ -35,7 +36,7 @@ def estimate_interaction_matrix(returns):
         alpha_i[i] = 0  # no self-interaction
         coefs.append(alpha_i)
     alpha = np.array(coefs)
-    r = np.array([reg.intercept_ for reg in coefs])
+    r = np.array([reg.intercept_ for reg in coefs])  # same as above, but safe
     return r, alpha
 
 def lotka_volterra_ode(X, t, r, alpha):
